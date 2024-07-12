@@ -5,6 +5,7 @@ import MainPage from './pages/MainPage';
 
 /* Theme variables */
 import './theme/variables.css';
+import '@ionic/react/css/palettes/dark.always.css';
 
 setupIonicReact();
 
@@ -15,9 +16,7 @@ const App: React.FC = () => (
         <Route exact path="/main">
           <MainPage />
         </Route>
-        <Route exact path="/">
-          <Redirect to="/main" />
-        </Route>
+        <Redirect exact path="/" to="/main" />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
