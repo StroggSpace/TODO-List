@@ -8,6 +8,9 @@ type State = {
 
 type Actions = {
   addTodo: (task: Task) => void;
+  removeTodo: (id: string) => void;
+  updateTodo: (task: Task) => void;
+  clearTodos: () => void;
 };
 
 export const useTodos = create<State & Actions>()(
