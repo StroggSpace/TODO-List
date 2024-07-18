@@ -3,9 +3,12 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
+  IonIcon,
   IonInput,
   IonItem,
   IonModal,
+  IonRadio,
+  IonRadioGroup,
   IonSelect,
   IonSelectOption,
   IonTextarea,
@@ -17,6 +20,7 @@ import { useTodos } from "../../store/useTodos";
 import { useForm } from "react-hook-form";
 import { Task } from "../todoList/types";
 import { v4 } from "uuid";
+import { themeIcons } from "../../theme/icons";
 
 export const CreateTodoModal = () => {
   const modal = useRef<HTMLIonModalElement>(null);
@@ -32,6 +36,7 @@ export const CreateTodoModal = () => {
       priority: 3,
       completed: false,
       deleted: false,
+      icon: themeIcons.menu,
     },
   });
 
@@ -96,6 +101,28 @@ export const CreateTodoModal = () => {
               <IonSelectOption value={3}>Низкий</IonSelectOption>
             </IonSelect>
           </IonItem>
+          {themeIcons ? (
+            <div className="flex items-center justify-around flex-row flex-wrap m-2">
+              {Object.values(themeIcons).map((icon) => (
+                <div key={icon}>
+                  <input
+                    className="hidden peer"
+                    type="radio"
+                    value={icon}
+                    id={icon}
+                    {...register("icon")}
+                  />
+                  <label
+                    key={icon}
+                    htmlFor={icon}
+                    className="grid items-center cursor-pointer hover:opacity-70 hover:scale-110 peer-checked:outline peer-checked:outline-2 peer-checked:rounded-full p-1"
+                  >
+                    <IonIcon icon={icon} />
+                  </label>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </form>
       </IonContent>
     </IonModal>

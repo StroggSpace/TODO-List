@@ -10,4 +10,5 @@ export type Task = {
     dueDate: Date | null;
     priority: number;
     completedAt: Date | null;  
+    icon: string;
 };

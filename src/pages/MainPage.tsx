@@ -1,29 +1,23 @@
-import {
-  IonButton,
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import { IonContent, IonHeader, IonTitle, IonToolbar } from "@ionic/react";
 import { TodoList } from "../components/todoList/TodoList";
 import { useTodos } from "../store/useTodos";
 import { CreateTodoModal } from "../components/createTodo/CreateTodoModal";
 import { Fab } from "../components/ui/Fab";
+import { themeIcons } from "../theme/icons";
 
-const Home: React.FC = () => {
+export const MainPage: React.FC = () => {
   const tasks = useTodos((state) => state.todos);
 
   return (
-    <IonPage className="h-full">
+    <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>TODO List</IonTitle>
+          <IonTitle>Мои задачи</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         {tasks.length > 0 ? (
-            <TodoList tasks={tasks} />
+          <TodoList tasks={tasks} />
         ) : (
           <div className="flex flex-col justify-center items-center h-full">
             <p className="text-center">
@@ -32,10 +26,8 @@ const Home: React.FC = () => {
           </div>
         )}
         <CreateTodoModal />
-        <Fab id="open-modal-create" />
+        <Fab id="open-modal-create" icon={themeIcons.add} />
       </IonContent>
-    </IonPage>
+    </>
   );
 };
-
-export default Home;

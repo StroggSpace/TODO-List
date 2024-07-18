@@ -11,10 +11,11 @@ type Actions = {
   removeTodo: (id: string) => void;
   updateTodo: (task: Task) => void;
   clearTodos: () => void;
+  getTodo: (id: string) => Task | undefined;
 };
 
 export const useTodos = create<State & Actions>()(
-  immer((set) => ({
+  immer((set, get) => ({
     todos: [],
     addTodo: (task) =>
       set((state) => {
@@ -32,5 +33,6 @@ export const useTodos = create<State & Actions>()(
       }),
 
     clearTodos: () => set(() => ({ todos: [] })),
+    getTodo: (id: string) => get().todos.find((t) => t.id === id),
   }))
 );
