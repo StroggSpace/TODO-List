@@ -33,16 +33,18 @@ export const CreateTodoModal = () => {
     formState: { errors },
   } = useForm<Task>({
     defaultValues: {
-      priority: 3,
+      priority: "3",
       completed: false,
       deleted: false,
-      icon: themeIcons.menu,
+      icon: themeIcons.fileTrayFull,
     },
   });
 
   const onWillDismiss = () => {
     setValue("title", "");
     setValue("description", "");
+    setValue("icon", themeIcons.fileTrayFull);
+    setValue("priority", "3");
   };
 
   const onSubmit = handleSubmit((data) => {
@@ -84,7 +86,7 @@ export const CreateTodoModal = () => {
           </IonItem>
           <IonItem>
             <IonTextarea
-              rows={20}
+              rows={15}
               placeholder="Укажите описание задачи"
               label="Описание"
               {...register("description")}
@@ -96,33 +98,35 @@ export const CreateTodoModal = () => {
               interface="action-sheet"
               {...register("priority")}
             >
-              <IonSelectOption value={1}>Высокий</IonSelectOption>
-              <IonSelectOption value={2}>Средний</IonSelectOption>
-              <IonSelectOption value={3}>Низкий</IonSelectOption>
+              <IonSelectOption value={"1"}>Высокий</IonSelectOption>
+              <IonSelectOption value={"2"}>Средний</IonSelectOption>
+              <IonSelectOption value={"3"}>Низкий</IonSelectOption>
             </IonSelect>
           </IonItem>
-          {themeIcons ? (
-            <div className="flex items-center justify-around flex-row flex-wrap m-2">
-              {Object.values(themeIcons).map((icon) => (
-                <div key={icon}>
-                  <input
-                    className="hidden peer"
-                    type="radio"
-                    value={icon}
-                    id={icon}
-                    {...register("icon")}
-                  />
-                  <label
-                    key={icon}
-                    htmlFor={icon}
-                    className="grid items-center cursor-pointer hover:opacity-70 hover:scale-110 peer-checked:outline peer-checked:outline-2 peer-checked:rounded-full p-1"
-                  >
-                    <IonIcon icon={icon} />
-                  </label>
-                </div>
-              ))}
-            </div>
-          ) : null}
+          <IonItem>
+            {themeIcons ? (
+              <div className="flex items-center justify-around flex-row flex-wrap m-2">
+                {Object.values(themeIcons).map((icon) => (
+                  <div key={icon}>
+                    <input
+                      className="hidden peer"
+                      type="radio"
+                      value={icon}
+                      id={icon}
+                      {...register("icon")}
+                    />
+                    <label
+                      key={icon}
+                      htmlFor={icon}
+                      className="grid items-center cursor-pointer hover:scale-110 peer-checked:outline peer-checked:outline-2 peer-checked:rounded-full p-1"
+                    >
+                      <IonIcon icon={icon} size="large" />
+                    </label>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </IonItem>
         </form>
       </IonContent>
     </IonModal>

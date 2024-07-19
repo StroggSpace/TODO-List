@@ -17,4 +17,12 @@ export const themeIcons = {
     fastFood: icons.fastFood,
     female: icons.female,
     male: icons.male,
+    cube: icons.cube,
+    fileTrayFull: icons.fileTrayFull,
+    flower: icons.flower,
+    image: icons.image,
+    location: icons.location,
+    sad: icons.sad,
+    skull: icons.skull,
+    today: icons.today,
 }
