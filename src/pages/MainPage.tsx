@@ -15,18 +15,18 @@ export const MainPage: React.FC = () => {
   const tasks = useTodos((state) => state.todos);
 
   return (
-    <IonPage>
+    <IonPage className="flex flex-col">
       <IonHeader>
         <IonToolbar>
           <IonTitle>Мои задачи</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className="h-dvh">
+      <IonContent fullscreen className="ion-padding" >
         {tasks.length > 0 ? (
           <TodoList tasks={tasks} />
         ) : (
-          <div className="flex flex-col justify-center items-center h-full">
-            <p className="text-center">
+          <div className="grid place-items-center h-full">
+            <p>
               У вас пока нет задач, самое время добавить!
             </p>
           </div>

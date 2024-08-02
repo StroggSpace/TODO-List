@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { Task } from "../todoList/types";
-import { IonItem, IonLabel } from "@ionic/react";
+import { IonIcon, IonItem, IonLabel } from "@ionic/react";
 import { PRIORITIES } from "../../utils/const";
+import { getStatusColor } from "../../utils/helpers";
 
 interface Props {
   task: Task;
@@ -18,15 +19,21 @@ export const TodoInfo: FC<Props> = ({ task }) => {
           {task.description ? <p>{task.description}</p> : null}
         </IonLabel>
       </IonItem>
+      {task.dueDate ? (
+        <IonItem>
+          <IonLabel>
+            <h2>Срок выполнения</h2>
+            {task.dueDate ? <p>{task.dueDate.toLocaleDateString()}</p> : null}
+          </IonLabel>
+        </IonItem>
+      ) : null}
+
       <IonItem>
-        <IonLabel>
-          <h2>
-            {task.dueDate ? "Срок выполнения" : "Срок выполнения отсутствует"}
-          </h2>
-          {task.dueDate ? <p>{task.dueDate.toLocaleDateString()}</p> : null}
-        </IonLabel>
-      </IonItem>
-      <IonItem>
+        <IonIcon
+          slot="end"
+          icon={task.icon}
+          color={getStatusColor(task.priority)}
+        />
         <IonLabel>
           <h2>Приоритет</h2>
           <p>{PRIORITIES[task.priority as keyof typeof PRIORITIES]}</p>
@@ -44,12 +51,14 @@ export const TodoInfo: FC<Props> = ({ task }) => {
           <p>{task.createdAt.toLocaleDateString()}</p>
         </IonLabel>
       </IonItem>
-      <IonItem>
-        <IonLabel>
-          <h2>Дата обновления</h2>
-          <p>{task.updatedAt?.toLocaleDateString()}</p>
-        </IonLabel>
-      </IonItem>
+      {task.updatedAt ? (
+        <IonItem>
+          <IonLabel>
+            <h2>Дата обновления</h2>
+            <p>{task.updatedAt.toLocaleDateString()}</p>
+          </IonLabel>
+        </IonItem>
+      ) : null}
     </>
   );
 };

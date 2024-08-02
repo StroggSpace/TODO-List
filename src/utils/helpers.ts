@@ -1,10 +1,12 @@
-export const getStatusColor = (status: number) => {
+export const getStatusColor = (status: string) => {
     switch (status) {
-        case 3:
+        case "3":
             return "success";
-        case 2:
+        case "2":
             return "warning";
-        default:
+        case "1":
             return "danger";
+        default:
+            return;
     }
 }

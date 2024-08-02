@@ -12,13 +12,14 @@ import { useTodos } from "../store/useTodos";
 import { Link, useParams } from "react-router-dom";
 import { themeIcons } from "../theme/icons";
 import { TodoInfo } from "../components/todoInfo/TodoInfo";
+import { EditTodo } from "../components/editTodo/EditTodo";
 
 export const TodoPage = () => {
   const { id }: { id: string } = useParams();
   const task = useTodos((state) => state.getTodo(id));
 
   return (
-    <IonPage>
+    <IonPage className="flex flex-col">
       <IonHeader>
         <IonToolbar>
           <IonButton slot="start">
@@ -27,10 +28,11 @@ export const TodoPage = () => {
           <IonTitle>{task?.title || "Мои задачи"}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen className="h-dvh">
+      <IonContent>
         {task ? (
           <>
             <TodoInfo task={task} />
+            <EditTodo />
             <Fab id="open-modal-edit" icon={themeIcons.reader} />
           </>
         ) : (

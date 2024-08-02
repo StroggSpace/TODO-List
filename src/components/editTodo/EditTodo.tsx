@@ -8,55 +8,54 @@ import {
   IonItem,
   IonLabel,
   IonModal,
-  IonRadio,
-  IonRadioGroup,
   IonSelect,
   IonSelectOption,
   IonTextarea,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useRef } from "react";
-import { useTodos } from "../../store/useTodos";
 import { useForm } from "react-hook-form";
 import { Task } from "../todoList/types";
-import { v4 } from "uuid";
+import { useParams } from "react-router";
+import { useTodos } from "../../store/useTodos";
 import { themeIcons } from "../../theme/icons";
+import { useRef } from "react";
 
-export const CreateTodoModal = () => {
+export const EditTodo = () => {
+  const { id }: { id: string } = useParams();
+  if (!id) {
+    return null;
+  }
   const modal = useRef<HTMLIonModalElement>(null);
-  const addTodo = useTodos((state) => state.addTodo);
+
+  const currentTodo = useTodos((state) => state.getTodo(id));
+
+  const updateTodo = useTodos((state) => state.updateTodo);
 
   const {
     register,
     handleSubmit,
-    setValue,
+    reset,
     formState: { errors },
   } = useForm<Task>({
     defaultValues: {
-      priority: "3",
-      completed: false,
-      deleted: false,
-      icon: themeIcons.fileTrayFull,
+      ...currentTodo,
     },
   });
 
   const onWillDismiss = () => {
-    setValue("title", "");
-    setValue("description", "");
-    setValue("icon", themeIcons.fileTrayFull);
-    setValue("priority", "3");
+    reset();
   };
 
   const onSubmit = handleSubmit((data) => {
-    addTodo({ ...data, createdAt: new Date(), id: v4() });
+    updateTodo(data);
     modal.current?.dismiss(null, "confirm");
   });
 
   return (
     <IonModal
       ref={modal}
-      trigger="open-modal-create"
+      trigger="open-modal-edit"
       onWillDismiss={onWillDismiss}
     >
       <IonHeader>

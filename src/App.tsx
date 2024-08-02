@@ -1,17 +1,16 @@
 import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
-  IonPage,
-  IonRouterOutlet,
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { MainPage } from "./pages/MainPage";
+import { TodoPage } from "./pages/TodoPage";
 
 /* Theme variables */
 import "./theme/variables.css";
 import "@ionic/react/css/palettes/dark.always.css";
-import { TodoPage } from "./pages/TodoPage";
+
 
 setupIonicReact();
 
