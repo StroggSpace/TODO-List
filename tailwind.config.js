@@ -10,6 +10,11 @@ export default {
       md: '768px',
       lg: '976px',
     },
+    extend: {
+      gridTemplateColumns: {
+        'header': '1fr 50px',
+      }
+    },
   },
   plugins: [],
 }

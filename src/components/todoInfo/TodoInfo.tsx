@@ -1,8 +1,7 @@
 import { FC } from "react";
 import { Task } from "../todoList/types";
-import { IonIcon, IonItem, IonLabel } from "@ionic/react";
+import { IonItem, IonLabel } from "@ionic/react";
 import { PRIORITIES } from "../../utils/const";
-import { getStatusColor } from "../../utils/helpers";
 
 interface Props {
   task: Task;
@@ -29,11 +28,6 @@ export const TodoInfo: FC<Props> = ({ task }) => {
       ) : null}
 
       <IonItem>
-        <IonIcon
-          slot="end"
-          icon={task.icon}
-          color={getStatusColor(task.priority)}
-        />
         <IonLabel>
           <h2>Приоритет</h2>
           <p>{PRIORITIES[task.priority as keyof typeof PRIORITIES]}</p>

@@ -2,6 +2,7 @@ import {
   IonButton,
   IonButtons,
   IonContent,
+  IonGrid,
   IonHeader,
   IonIcon,
   IonInput,
@@ -10,6 +11,7 @@ import {
   IonModal,
   IonRadio,
   IonRadioGroup,
+  IonRow,
   IonSelect,
   IonSelectOption,
   IonTextarea,
@@ -22,6 +24,7 @@ import { useForm } from "react-hook-form";
 import { Task } from "../todoList/types";
 import { v4 } from "uuid";
 import { themeIcons } from "../../theme/icons";
+import { TodoForm } from "../TodoForm";
 
 export const CreateTodoModal = () => {
   const modal = useRef<HTMLIonModalElement>(null);
@@ -74,64 +77,8 @@ export const CreateTodoModal = () => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
-        <form>
-          <IonItem>
-            <IonInput
-              placeholder="Укажите название задачи"
-              label="Название"
-              type="text"
-              {...register("title", { required: true })}
-            />
-            {errors.title && <p>Введите название</p>}
-          </IonItem>
-          <IonItem>
-            <IonTextarea
-              rows={15}
-              placeholder="Укажите описание задачи"
-              label="Описание"
-              {...register("description")}
-            ></IonTextarea>
-          </IonItem>
-          <IonItem>
-            <IonSelect
-              label="Приоритет"
-              interface="action-sheet"
-              {...register("priority")}
-            >
-              <IonSelectOption value={"1"}>Высокий</IonSelectOption>
-              <IonSelectOption value={"2"}>Средний</IonSelectOption>
-              <IonSelectOption value={"3"}>Низкий</IonSelectOption>
-            </IonSelect>
-          </IonItem>
-          <IonItem>
-            <IonLabel>
-              Выберите иконку задачи
-              {themeIcons ? (
-                <div className="flex items-center flex-row flex-wrap m-2">
-                  {Object.values(themeIcons).map((icon) => (
-                    <div key={icon}>
-                      <input
-                        className="hidden peer"
-                        type="radio"
-                        value={icon}
-                        id={icon}
-                        {...register("icon")}
-                      />
-                      <label
-                        key={icon}
-                        htmlFor={icon}
-                        className="grid items-center cursor-pointer hover:scale-110 peer-checked:outline peer-checked:outline-2 peer-checked:rounded-full p-1"
-                      >
-                        <IonIcon icon={icon} size="large" />
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-            </IonLabel>
-          </IonItem>
-        </form>
+      <IonContent fullscreen className="ion-padding">
+        <TodoForm register={register} errors={errors} />
       </IonContent>
     </IonModal>
   );
