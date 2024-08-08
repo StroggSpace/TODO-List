@@ -1,4 +1,5 @@
 import * as icons from 'ionicons/icons';
+import alert from '../assets/icons/alert.svg';
 
 export const themeIcons = {
     add: icons.add,
@@ -25,4 +26,6 @@ export const themeIcons = {
     sad: icons.sad,
     skull: icons.skull,
     today: icons.today,
+    alert: alert,
+    popOver: icons.ellipsisVertical,
 }

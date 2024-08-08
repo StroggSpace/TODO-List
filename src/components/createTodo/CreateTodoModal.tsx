@@ -2,19 +2,8 @@ import {
   IonButton,
   IonButtons,
   IonContent,
-  IonGrid,
   IonHeader,
-  IonIcon,
-  IonInput,
-  IonItem,
-  IonLabel,
   IonModal,
-  IonRadio,
-  IonRadioGroup,
-  IonRow,
-  IonSelect,
-  IonSelectOption,
-  IonTextarea,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -23,7 +12,6 @@ import { useTodos } from "../../store/useTodos";
 import { useForm } from "react-hook-form";
 import { Task } from "../todoList/types";
 import { v4 } from "uuid";
-import { themeIcons } from "../../theme/icons";
 import { TodoForm } from "../TodoForm";
 
 export const CreateTodoModal = () => {
@@ -34,21 +22,21 @@ export const CreateTodoModal = () => {
     register,
     handleSubmit,
     setValue,
+    getValues,
+    watch,
     formState: { errors },
   } = useForm<Task>({
     defaultValues: {
-      priority: "3",
+      priority: false,
       completed: false,
       deleted: false,
-      icon: themeIcons.fileTrayFull,
     },
   });
 
   const onWillDismiss = () => {
     setValue("title", "");
-    setValue("description", "");
-    setValue("icon", themeIcons.fileTrayFull);
-    setValue("priority", "3");
+    setValue("note", "");
+    setValue("priority", false);
   };
 
   const onSubmit = handleSubmit((data) => {
@@ -78,7 +66,12 @@ export const CreateTodoModal = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <TodoForm register={register} errors={errors} />
+        <TodoForm
+          register={register}
+          errors={errors}
+          setValue={setValue}
+          getValues={getValues}
+        />
       </IonContent>
     </IonModal>
   );

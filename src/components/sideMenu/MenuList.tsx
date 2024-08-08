@@ -11,6 +11,7 @@ export const MenuList = () => {
         <IonToggle
           checked={darkMode}
           onIonChange={() => toggleThemeMode(!darkMode)}
+          enableOnOffLabels
         >
           Темная тема
         </IonToggle>

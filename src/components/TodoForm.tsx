@@ -1,24 +1,26 @@
+import { IonItem, IonInput, IonTextarea, IonToggle } from "@ionic/react";
 import {
-  IonItem,
-  IonInput,
-  IonTextarea,
-  IonSelect,
-  IonSelectOption,
-  IonLabel,
-  IonIcon,
-  IonRow,
-} from "@ionic/react";
-import { themeIcons } from "../theme/icons";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+  FieldErrors,
+  UseFormGetValues,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
 import { FC } from "react";
 import { Task } from "./todoList/types";
 
 interface Props {
   register: UseFormRegister<Task>;
   errors: FieldErrors<Task>;
+  setValue: UseFormSetValue<Task>;
+  getValues: UseFormGetValues<Task>;
 }
 
-export const TodoForm: FC<Props> = ({ register, errors }) => {
+export const TodoForm: FC<Props> = ({
+  register,
+  errors,
+  getValues,
+  setValue,
+}) => {
   return (
     <form>
       <IonItem>
@@ -34,53 +36,21 @@ export const TodoForm: FC<Props> = ({ register, errors }) => {
       </IonItem>
       <IonItem>
         <IonTextarea
-          rows={15}
-          placeholder="Укажите описание задачи"
-          label="Описание"
-          {...register("description")}
+          rows={20}
+          placeholder="Укажите примечание"
+          label="Примечание"
+          {...register("note")}
         ></IonTextarea>
       </IonItem>
       <IonItem>
-        <IonSelect
-          label="Приоритет"
-          interface="action-sheet"
+        <IonToggle
+          enableOnOffLabels
+          checked={getValues("priority")}
+          onIonChange={() => setValue("priority", !getValues("priority"))}
           {...register("priority")}
         >
-          <IonSelectOption value={"1"}>Высокий</IonSelectOption>
-          <IonSelectOption value={"2"}>Средний</IonSelectOption>
-          <IonSelectOption value={"3"}>Низкий</IonSelectOption>
-        </IonSelect>
-      </IonItem>
-      <IonItem>
-        <IonLabel>
-          Выберите иконку задачи
-          {themeIcons ? (
-            <IonRow>
-              {Object.values(themeIcons).map((icon) => (
-                <div key={icon}>
-                  <input
-                    className="hidden peer"
-                    type="radio"
-                    value={icon}
-                    id={icon}
-                    {...register("icon")}
-                  />
-                  <label
-                    key={icon}
-                    htmlFor={icon}
-                    className="grid items-center cursor-pointer
-                   hover:scale-110 peer-checked:outline peer-checked:outline-1 
-                    peer-checked:rounded-full m-1
-                    peer-checked:animate-bounce
-                    "
-                  >
-                    <IonIcon icon={icon} size="large" />
-                  </label>
-                </div>
-              ))}
-            </IonRow>
-          ) : null}
-        </IonLabel>
+          Важное
+        </IonToggle>
       </IonItem>
     </form>
   );

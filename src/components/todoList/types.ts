@@ -6,9 +6,8 @@ export type Task = {
     updatedAt: Date | null;
     deletedAt: Date | null;
     deleted: boolean;
-    description: string | null;
+    note: string | null;
     dueDate: Date | null;
-    priority: string;
-    completedAt: Date | null;  
-    icon: string;
+    priority: boolean;
+    completedAt: Date | null;
 };

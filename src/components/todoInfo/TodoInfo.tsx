@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { Task } from "../todoList/types";
 import { IonItem, IonLabel } from "@ionic/react";
-import { PRIORITIES } from "../../utils/const";
 
 interface Props {
   task: Task;
@@ -12,10 +11,8 @@ export const TodoInfo: FC<Props> = ({ task }) => {
     <>
       <IonItem>
         <IonLabel>
-          <h2>
-            {task.description ? "Описание" : "Описание задачи отсутствует"}
-          </h2>
-          {task.description ? <p>{task.description}</p> : null}
+          <h2>{task.note ? "Описание" : "Описание задачи отсутствует"}</h2>
+          {task.note ? <p>{task.note}</p> : null}
         </IonLabel>
       </IonItem>
       {task.dueDate ? (
@@ -26,17 +23,14 @@ export const TodoInfo: FC<Props> = ({ task }) => {
           </IonLabel>
         </IonItem>
       ) : null}
-
-      <IonItem>
-        <IonLabel>
-          <h2>Приоритет</h2>
-          <p>{PRIORITIES[task.priority as keyof typeof PRIORITIES]}</p>
-        </IonLabel>
-      </IonItem>
       <IonItem>
         <IonLabel>
           <h2>Статус</h2>
-          <p>{task.completed ? "Выполнено" : "Не выполнено"}</p>
+          <p>
+            {task.completed
+              ? `Выполнено ${task.completedAt?.toLocaleDateString()}`
+              : "Не выполнено"}
+          </p>
         </IonLabel>
       </IonItem>
       <IonItem>

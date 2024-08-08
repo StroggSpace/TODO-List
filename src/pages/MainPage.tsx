@@ -14,8 +14,17 @@ import { Fab } from "../components/ui/Fab";
 import { themeIcons } from "../theme/icons";
 import { SideMenu } from "../components/sideMenu/sideMenu";
 
+const Lists = {
+  active: "Активные",
+  completed: "Завершенные",
+  overdue: "Просроченные",
+};
+
 export const MainPage: React.FC = () => {
   const tasks = useTodos((state) => state.todos);
+  const activeTasks = useTodos((state) => state.getActiveTodos());
+  const completedTasks = useTodos((state) => state.getCompletedTodos());
+  const overdueTodos = useTodos((state) => state.getOverdueTodos());
 
   return (
     <>
@@ -31,7 +40,19 @@ export const MainPage: React.FC = () => {
         </IonHeader>
         <IonContent fullscreen className="ion-padding">
           {tasks.length > 0 ? (
-            <TodoList tasks={tasks} />
+            Object.keys(Lists).map((list) => (
+              <TodoList
+                tasks={
+                  list === "active"
+                    ? activeTasks
+                    : list === "completed"
+                    ? completedTasks
+                    : overdueTodos
+                }
+                listName={Lists[list as keyof typeof Lists]}
+                key={list}
+              />
+            ))
           ) : (
             <div className="grid place-items-center h-full">
               <p>У вас пока нет задач, самое время добавить!</p>

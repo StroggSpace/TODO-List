@@ -3,14 +3,7 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
-  IonIcon,
-  IonInput,
-  IonItem,
-  IonLabel,
   IonModal,
-  IonSelect,
-  IonSelectOption,
-  IonTextarea,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -18,7 +11,6 @@ import { useForm } from "react-hook-form";
 import { Task } from "../todoList/types";
 import { useParams } from "react-router";
 import { useTodos } from "../../store/useTodos";
-import { themeIcons } from "../../theme/icons";
 import { useRef } from "react";
 import { TodoForm } from "../TodoForm";
 
@@ -35,8 +27,11 @@ export const EditTodo = () => {
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
+    getValues,
+    setValue,
     formState: { errors },
   } = useForm<Task>({
     defaultValues: {
@@ -76,7 +71,12 @@ export const EditTodo = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <TodoForm register={register} errors={errors} />
+        <TodoForm
+          register={register}
+          errors={errors}
+          getValues={getValues}
+          setValue={setValue}
+        />
       </IonContent>
     </IonModal>
   );
