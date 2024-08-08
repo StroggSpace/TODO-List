@@ -10,6 +10,10 @@ export default {
       md: '768px',
       lg: '976px',
     },
+    colors: {
+      'danger': '#c5000f',
+      'success': '#2dd55b',
+    },
     extend: {
       keyframes: {
         wiggle: {

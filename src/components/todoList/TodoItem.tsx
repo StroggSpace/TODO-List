@@ -28,9 +28,27 @@ export const TodoItem: FC<Props> = ({ task, checked, onToggle }) => {
         checked={checked}
         onIonChange={onToggle}
       />
-      <IonItem className="w-full" routerLink={`/todo/${task.id}`}>
+      <IonItem
+        className={`w-full ${checked ? "line-through" : ""}`}
+        routerLink={`/todo/${task.id}`}
+      >
         {task.priority ? <IonIcon icon={themeIcons.alert} /> : null}
-        <IonLabel>{task.title}</IonLabel>
+        <IonLabel>
+          <h2>{task.title}</h2>
+          {task.deadline ? (
+            <p
+              className={
+                task.dueDate &&
+                !task.completed &&
+                new Date(task.dueDate) < new Date()
+                  ? "underline decoration-danger"
+                  : ""
+              }
+            >
+              {new Date(task.dueDate as Date).toLocaleDateString()}
+            </p>
+          ) : null}
+        </IonLabel>
       </IonItem>
       <IonButton id={`click-trigger-${task.id}`} fill="clear" size="small">
         <IonIcon icon={themeIcons.popOver} />

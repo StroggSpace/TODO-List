@@ -17,10 +17,9 @@ import { SideMenu } from "../components/sideMenu/sideMenu";
 const Lists = {
   active: "Активные",
   completed: "Завершенные",
-  overdue: "Просроченные",
 };
 
-export const MainPage: React.FC = () => {
+export const TodosPage: React.FC = () => {
   const tasks = useTodos((state) => state.todos);
   const activeTasks = useTodos((state) => state.getActiveTodos());
   const completedTasks = useTodos((state) => state.getCompletedTodos());
@@ -39,16 +38,13 @@ export const MainPage: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen className="ion-padding">
+          {overdueTodos.length > 0 && (
+            <TodoList tasks={overdueTodos} listName="Просроченные" />
+          )}
           {tasks.length > 0 ? (
             Object.keys(Lists).map((list) => (
               <TodoList
-                tasks={
-                  list === "active"
-                    ? activeTasks
-                    : list === "completed"
-                    ? completedTasks
-                    : overdueTodos
-                }
+                tasks={list === "active" ? activeTasks : completedTasks}
                 listName={Lists[list as keyof typeof Lists]}
                 key={list}
               />

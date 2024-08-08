@@ -8,6 +8,7 @@ import {
   IonPage,
   IonButtons,
   IonMenuButton,
+  IonIcon,
 } from "@ionic/react";
 import { Fab } from "../components/ui/Fab";
 import { useTodos } from "../store/useTodos";
@@ -17,7 +18,7 @@ import { TodoInfo } from "../components/todoInfo/TodoInfo";
 import { EditTodo } from "../components/editTodo/EditTodo";
 import { SideMenu } from "../components/sideMenu/sideMenu";
 
-export const TodoPage = () => {
+export const TodoDetailPage = () => {
   const { id }: { id: string } = useParams();
   const task = useTodos((state) => state.getTodo(id));
 
@@ -44,7 +45,12 @@ export const TodoPage = () => {
             <IonButtons slot="end">
               <IonMenuButton></IonMenuButton>
             </IonButtons>
-            <IonTitle>{task.title}</IonTitle>
+            <div className="flex justify-center">
+              {task.priority ? (
+                <IonIcon icon={themeIcons.alert} size="large" />
+              ) : null}
+              <IonTitle className="flex justify-center">{task.title}</IonTitle>
+            </div>
           </IonToolbar>
         </IonHeader>
         <IonContent>

@@ -30,6 +30,7 @@ export const CreateTodoModal = () => {
       priority: false,
       completed: false,
       deleted: false,
+      deadline: false,
     },
   });
 
@@ -37,10 +38,16 @@ export const CreateTodoModal = () => {
     setValue("title", "");
     setValue("note", "");
     setValue("priority", false);
+    setValue("deadline", false);
   };
 
   const onSubmit = handleSubmit((data) => {
-    addTodo({ ...data, createdAt: new Date(), id: v4() });
+    addTodo({
+      ...data,
+      createdAt: new Date(),
+      id: v4(),
+      dueDate: data.deadline ? data.dueDate : null,
+    });
     modal.current?.dismiss(null, "confirm");
   });
 
@@ -71,6 +78,7 @@ export const CreateTodoModal = () => {
           errors={errors}
           setValue={setValue}
           getValues={getValues}
+          watch={watch}
         />
       </IonContent>
     </IonModal>

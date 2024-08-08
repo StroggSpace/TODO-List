@@ -19,7 +19,17 @@ export const TodoInfo: FC<Props> = ({ task }) => {
         <IonItem>
           <IonLabel>
             <h2>Срок выполнения</h2>
-            {task.dueDate ? <p>{task.dueDate.toLocaleDateString()}</p> : null}
+            {task.dueDate ? (
+              <p
+                className={
+                  task.dueDate && new Date(task.dueDate) < new Date()
+                    ? "underline decoration-danger"
+                    : ""
+                }
+              >
+                {new Date(task.dueDate).toLocaleDateString()}
+              </p>
+            ) : null}
           </IonLabel>
         </IonItem>
       ) : null}
@@ -28,7 +38,9 @@ export const TodoInfo: FC<Props> = ({ task }) => {
           <h2>Статус</h2>
           <p>
             {task.completed
-              ? `Выполнено ${task.completedAt?.toLocaleDateString()}`
+              ? `Выполнено ${new Date(
+                  task.completedAt || new Date()
+                ).toLocaleDateString()}`
               : "Не выполнено"}
           </p>
         </IonLabel>
@@ -36,14 +48,14 @@ export const TodoInfo: FC<Props> = ({ task }) => {
       <IonItem>
         <IonLabel>
           <h2>Дата создания</h2>
-          <p>{task.createdAt.toLocaleDateString()}</p>
+          <p>{new Date(task.createdAt).toLocaleDateString()}</p>
         </IonLabel>
       </IonItem>
       {task.updatedAt ? (
         <IonItem>
           <IonLabel>
             <h2>Дата обновления</h2>
-            <p>{task.updatedAt.toLocaleDateString()}</p>
+            <p>{new Date(task.updatedAt).toLocaleDateString()}</p>
           </IonLabel>
         </IonItem>
       ) : null}

@@ -12,19 +12,25 @@ interface Props {
 export const TodoList: FC<Props> = ({ tasks, listName }) => {
   const toggleCompleteTodo = useTodos((state) => state.toggleCompleteTodo);
   if (!tasks || tasks.length === 0) return null;
+
   return (
     <IonList>
-      <IonLabel className="pl-3">{listName}</IonLabel>
+      <IonLabel
+        className={`pl-3 ${listName === "Завершенные" && "text-success"} 
+        ${listName === "Просроченные" && "text-danger"}`}
+      >
+        {listName}
+      </IonLabel>
       {tasks
         ? tasks.map((task) => (
-          <TodoItem
-            key={task.id}
-            task={task}
-            checked={task.completed}
-            onToggle={() => toggleCompleteTodo(task.id)}
-          />
-        ))
-      : null}
-  </IonList>
-);
+            <TodoItem
+              key={task.id}
+              task={task}
+              checked={task.completed}
+              onToggle={() => toggleCompleteTodo(task.id)}
+            />
+          ))
+        : null}
+    </IonList>
+  );
 };

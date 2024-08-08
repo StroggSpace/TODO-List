@@ -27,11 +27,11 @@ export const EditTodo = () => {
 
   const {
     register,
-    control,
     handleSubmit,
     reset,
     getValues,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<Task>({
     defaultValues: {
@@ -45,7 +45,10 @@ export const EditTodo = () => {
   };
 
   const onSubmit = handleSubmit((data) => {
-    updateTodo(data);
+    updateTodo({
+      ...data,
+      dueDate: data.deadline ? data.dueDate : null,
+    });
     modal.current?.dismiss(null, "confirm");
   });
 
@@ -76,6 +79,7 @@ export const EditTodo = () => {
           errors={errors}
           getValues={getValues}
           setValue={setValue}
+          watch={watch}
         />
       </IonContent>
     </IonModal>

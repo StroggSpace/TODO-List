@@ -7,7 +7,8 @@ export type Task = {
     deletedAt: Date | null;
     deleted: boolean;
     note: string | null;
-    dueDate: Date | null;
+    dueDate?: Date | null;
     priority: boolean;
     completedAt: Date | null;
+    deadline: boolean;
 };

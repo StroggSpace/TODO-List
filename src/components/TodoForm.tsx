@@ -1,9 +1,16 @@
-import { IonItem, IonInput, IonTextarea, IonToggle } from "@ionic/react";
+import {
+  IonItem,
+  IonInput,
+  IonTextarea,
+  IonToggle,
+  IonDatetime,
+} from "@ionic/react";
 import {
   FieldErrors,
   UseFormGetValues,
   UseFormRegister,
   UseFormSetValue,
+  UseFormWatch,
 } from "react-hook-form";
 import { FC } from "react";
 import { Task } from "./todoList/types";
@@ -13,6 +20,7 @@ interface Props {
   errors: FieldErrors<Task>;
   setValue: UseFormSetValue<Task>;
   getValues: UseFormGetValues<Task>;
+  watch: UseFormWatch<Task>;
 }
 
 export const TodoForm: FC<Props> = ({
@@ -20,6 +28,7 @@ export const TodoForm: FC<Props> = ({
   errors,
   getValues,
   setValue,
+  watch,
 }) => {
   return (
     <form>
@@ -36,7 +45,7 @@ export const TodoForm: FC<Props> = ({
       </IonItem>
       <IonItem>
         <IonTextarea
-          rows={20}
+          rows={10}
           placeholder="Укажите примечание"
           label="Примечание"
           {...register("note")}
@@ -52,6 +61,25 @@ export const TodoForm: FC<Props> = ({
           Важное
         </IonToggle>
       </IonItem>
+      <IonItem>
+        <IonToggle
+          enableOnOffLabels
+          checked={getValues("deadline")}
+          onIonChange={() => setValue("deadline", !getValues("deadline"))}
+          {...register("deadline")}
+        >
+          Дедлайн
+        </IonToggle>
+      </IonItem>
+      {watch("deadline") && (
+        <IonItem>
+          <IonInput
+            label="Срок выполнения"
+            type="date"
+            {...register("dueDate")}
+          />
+        </IonItem>
+      )}
     </form>
   );
 };
