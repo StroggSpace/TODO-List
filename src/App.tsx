@@ -10,17 +10,16 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { TodosPage } from "./pages/TodosPage";
-import { TodoDetailPage } from "./pages/TodoDetailPage";
 
 /* Theme variables */
-import "./theme/variables.css";
+import "@/theme/variables.css";
 import "@ionic/react/css/palettes/dark.class.css";
-import { useDarkMode } from "./store/useDarkMode";
-import { themeIcons } from "./theme/icons";
+import { useDarkMode } from "@/store/useDarkMode";
+import { themeIcons } from "@/theme/icons";
+import { TodosOutlet } from "@/pages/TodosOutlet/TodosOutlet";
 
 setupIonicReact();
-// todo: fix double render component
+
 export const App: React.FC = () => {
   const { darkMode } = useDarkMode();
   return (
@@ -28,8 +27,7 @@ export const App: React.FC = () => {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route exact path="/todo" component={TodosPage} />
-            <Route exact path="/todo/:id" component={TodoDetailPage} />
+            <TodosOutlet />
             <Redirect exact path="/" to="/todo" />
           </IonRouterOutlet>
 

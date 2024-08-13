@@ -7,12 +7,12 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { TodoList } from "../components/todoList/TodoList";
-import { useTodos } from "../store/useTodos";
-import { CreateTodoModal } from "../components/createTodo/CreateTodoModal";
-import { Fab } from "../components/ui/Fab";
-import { themeIcons } from "../theme/icons";
-import { SideMenu } from "../components/sideMenu/sideMenu";
+import { TodoList } from "@/components/todoList/TodoList";
+import { useTodos } from "@/store/useTodos";
+import { CreateTodoModal } from "@/components/createTodo/CreateTodoModal";
+import { Fab } from "@/components/ui/Fab";
+import { themeIcons } from "@/theme/icons";
+import { SideMenu } from "@/components/sideMenu/sideMenu";
 
 const Lists = {
   active: "Активные",
@@ -27,8 +27,8 @@ export const TodosPage: React.FC = () => {
 
   return (
     <>
-      <SideMenu id="MainPage" />
-      <IonPage className="flex flex-col" id="MainPage">
+      <SideMenu id="TodosPage" />
+      <IonPage className="flex flex-col" id="TodosPage">
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="end">
