@@ -17,6 +17,7 @@ import { themeIcons } from "@/theme/icons";
 import { TodoInfo } from "@/components/todoInfo/TodoInfo";
 import { EditTodo } from "@/components/editTodo/EditTodo";
 import { SideMenu } from "@/components/sideMenu/sideMenu";
+import { ButtonsTodoComponent } from "@/components/ButtonsTodoComponent";
 
 export const TodoDetailPage = () => {
   const { id }: { id: string } = useParams();
@@ -59,6 +60,7 @@ export const TodoDetailPage = () => {
         </IonHeader>
         <IonContent fullscreen className="ion-padding">
           <TodoInfo task={task} />
+          <ButtonsTodoComponent task={task} />
           <EditTodo />
           <Fab id="open-modal-edit" icon={themeIcons.reader} />
         </IonContent>

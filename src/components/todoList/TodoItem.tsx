@@ -20,6 +20,11 @@ interface Props {
 
 export const TodoItem: FC<Props> = ({ task, checked, onToggle }) => {
   const toggleRemoveTodo = useTodos((state) => state.toggleRemoveTodo);
+  const clearTodo = useTodos((state) => state.clearTodo);
+
+  const removeTodo = () => {
+    task.deleted ? clearTodo(task.id) : toggleRemoveTodo(task.id);
+  };
 
   return (
     <div className="flex items-center gap-1">
@@ -55,7 +60,7 @@ export const TodoItem: FC<Props> = ({ task, checked, onToggle }) => {
       </IonButton>
       <IonPopover trigger={`click-trigger-${task.id}`} triggerAction="click">
         <IonContent class="ion-padding">
-          <IonItem button onClick={() => toggleRemoveTodo(task.id)}>
+          <IonItem button onClick={() => removeTodo()}>
             <IonIcon icon={themeIcons.remove} slot="start" />
             <IonLabel>Удалить</IonLabel>
           </IonItem>

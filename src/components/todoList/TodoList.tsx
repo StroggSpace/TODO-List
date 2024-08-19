@@ -6,7 +6,7 @@ import { useTodos } from "../../store/useTodos";
 
 interface Props {
   tasks: Task[];
-  listName: string;
+  listName?: string;
 }
 
 export const TodoList: FC<Props> = ({ tasks, listName }) => {
@@ -15,12 +15,15 @@ export const TodoList: FC<Props> = ({ tasks, listName }) => {
 
   return (
     <IonList>
-      <IonLabel
-        className={`pl-3 ${listName === "Завершенные" && "text-success"} 
+      {listName && (
+        <IonLabel
+          className={`pl-3 ${listName === "Завершенные" && "text-success"} 
         ${listName === "Просроченные" && "text-danger"}`}
-      >
-        {listName}
-      </IonLabel>
+        >
+          {listName}
+        </IonLabel>
+      )}
+
       {tasks
         ? tasks.map((task) => (
             <TodoItem

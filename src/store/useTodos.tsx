@@ -12,6 +12,7 @@ type Actions = {
   toggleRemoveTodo: (id: string) => void;
   updateTodo: (task: Task) => void;
   clearTodos: () => void;
+  clearTodo: (id: string) => void;
   getTodo: (id: string) => Task | undefined;
   getCompletedTodos: () => Task[];
   getDeletedTodos: () => Task[];
@@ -54,6 +55,11 @@ export const useTodos = create<State & Actions>()(
     clearTodos: () =>
       set((state) => {
         state.todos = [];
+        setObject("todos", state.todos);
+      }),
+    clearTodo: (id: string) =>
+      set((state) => {
+        state.todos = state.todos.filter((t) => t.id !== id);
         setObject("todos", state.todos);
       }),
     getTodo: (id: string) => get().todos.find((t) => t.id === id),

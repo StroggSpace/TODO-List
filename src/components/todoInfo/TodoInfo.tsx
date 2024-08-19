@@ -1,14 +1,46 @@
 import { FC } from "react";
 import { Task } from "../../types/Objects";
-import { IonItem, IonLabel } from "@ionic/react";
+import {
+  IonButton,
+  IonContent,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonPopover,
+} from "@ionic/react";
+import { themeIcons } from "@/theme/icons";
+import { useTodos } from "@/store/useTodos";
 
 interface Props {
   task: Task;
 }
 
 export const TodoInfo: FC<Props> = ({ task }) => {
+  const toggleRemoveTodo = useTodos((state) => state.toggleRemoveTodo);
   return (
     <>
+      {task.deleted ? (
+        <IonItem>
+          <IonLabel>
+            <h2 className="text-danger">Удален</h2>
+          </IonLabel>
+          <IonIcon icon={themeIcons.remove} slot="start" />
+          <IonButton id={`click-trigger-${task.id}`} fill="clear" size="small">
+            <IonIcon icon={themeIcons.popOver} />
+          </IonButton>
+          <IonPopover
+            trigger={`click-trigger-${task.id}`}
+            triggerAction="click"
+          >
+            <IonContent class="ion-padding">
+              <IonItem button onClick={() => toggleRemoveTodo(task.id)}>
+                <IonIcon icon={themeIcons.add} slot="start" />
+                <IonLabel>Восстановить</IonLabel>
+              </IonItem>
+            </IonContent>
+          </IonPopover>
+        </IonItem>
+      ) : null}
       <IonItem>
         <IonLabel>
           <h2>{task.note ? "Описание" : "Описание задачи отсутствует"}</h2>

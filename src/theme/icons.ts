@@ -28,4 +28,5 @@ export const themeIcons = {
     today: icons.today,
     alert: alert,
     popOver: icons.ellipsisVertical,
+    check: icons.checkmark,
 }
