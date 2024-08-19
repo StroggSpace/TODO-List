@@ -10,7 +10,7 @@ import {
 import { useRef } from "react";
 import { useTodos } from "../../store/useTodos";
 import { useForm } from "react-hook-form";
-import { Task } from "../todoList/types";
+import { Task } from "../../types/Objects";
 import { v4 } from "uuid";
 import { TodoForm } from "../TodoForm";
 

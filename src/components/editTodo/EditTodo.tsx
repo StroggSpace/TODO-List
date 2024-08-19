@@ -8,7 +8,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { useForm } from "react-hook-form";
-import { Task } from "../todoList/types";
+import { Task } from "../../types/Objects";
 import { useParams } from "react-router";
 import { useTodos } from "../../store/useTodos";
 import { useRef } from "react";

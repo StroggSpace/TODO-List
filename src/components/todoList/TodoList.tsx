@@ -1,6 +1,6 @@
 import { IonLabel, IonList } from "@ionic/react";
 import { FC } from "react";
-import { Task } from "./types";
+import { Task } from "../../types/Objects";
 import { TodoItem } from "./TodoItem";
 import { useTodos } from "../../store/useTodos";
 

@@ -13,7 +13,7 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { FC } from "react";
-import { Task } from "./todoList/types";
+import { Task } from "../types/Objects";
 
 interface Props {
   register: UseFormRegister<Task>;

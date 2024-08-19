@@ -8,7 +8,7 @@ import {
   IonPopover,
 } from "@ionic/react";
 import { FC } from "react";
-import { Task } from "./types";
+import { Task } from "../../types/Objects";
 import { useTodos } from "../../store/useTodos";
 import { themeIcons } from "../../theme/icons";
 

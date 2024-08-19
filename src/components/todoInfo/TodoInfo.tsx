@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Task } from "../todoList/types";
+import { Task } from "../../types/Objects";
 import { IonItem, IonLabel } from "@ionic/react";
 
 interface Props {
