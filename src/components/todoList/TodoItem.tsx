@@ -6,11 +6,14 @@ import {
   IonItem,
   IonLabel,
   IonPopover,
+  IonText,
 } from "@ionic/react";
 import { FC } from "react";
 import { Task } from "../../types/Objects";
 import { useTodos } from "../../store/useTodos";
 import { themeIcons } from "../../theme/icons";
+import { useSettings } from "@/store/useSettings";
+import { getDaystoDelete } from "@/utils/getDaystoDelete";
 
 interface Props {
   task: Task;
@@ -21,6 +24,7 @@ interface Props {
 export const TodoItem: FC<Props> = ({ task, checked, onToggle }) => {
   const toggleRemoveTodo = useTodos((state) => state.toggleRemoveTodo);
   const clearTodo = useTodos((state) => state.clearTodo);
+  const settings = useSettings((state) => state.settings);
 
   const removeTodo = () => {
     task.deleted ? clearTodo(task.id) : toggleRemoveTodo(task.id);
@@ -54,6 +58,12 @@ export const TodoItem: FC<Props> = ({ task, checked, onToggle }) => {
             </p>
           ) : null}
         </IonLabel>
+        {task.deleted && task.deletedAt ? (
+          <IonText className="text-danger">{`До полного удаления ${getDaystoDelete(
+            new Date(task.deletedAt),
+            settings.deleteDays
+          )} дн.`}</IonText>
+        ) : null}
       </IonItem>
       <IonButton id={`click-trigger-${task.id}`} fill="clear" size="small">
         <IonIcon icon={themeIcons.popOver} />

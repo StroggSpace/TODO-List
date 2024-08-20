@@ -40,6 +40,7 @@ export const useTodos = create<State & Actions>()(
               ...t,
               deleted: !t.deleted,
               updatedAt: new Date(),
+              deletedAt: t.deleted ? null : new Date(),
             };
           }
           return t;

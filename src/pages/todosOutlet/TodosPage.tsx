@@ -13,6 +13,8 @@ import { CreateTodoModal } from "@/components/createTodo/CreateTodoModal";
 import { Fab } from "@/components/ui/Fab";
 import { themeIcons } from "@/theme/icons";
 import { SideMenu } from "@/components/sideMenu/sideMenu";
+import { useSettings } from "@/store/useSettings";
+import { getCurrentTasks } from "@/utils/getCurrentTasks";
 
 const Lists = {
   active: "Активные",
@@ -24,6 +26,7 @@ export const TodosPage: React.FC = () => {
   const activeTasks = useTodos((state) => state.getActiveTodos());
   const completedTasks = useTodos((state) => state.getCompletedTodos());
   const overdueTodos = useTodos((state) => state.getOverdueTodos());
+  const settings = useSettings((state) => state.settings);
 
   return (
     <>
@@ -44,7 +47,15 @@ export const TodosPage: React.FC = () => {
           {tasks.length > 0 ? (
             Object.keys(Lists).map((list) => (
               <TodoList
-                tasks={list === "active" ? activeTasks : completedTasks}
+                tasks={getCurrentTasks(
+                  {
+                    activeTodos: activeTasks,
+                    completedTodos: completedTasks,
+                    overdueTodos: overdueTodos,
+                  },
+                  list,
+                  settings
+                )}
                 listName={Lists[list as keyof typeof Lists]}
                 key={list}
               />

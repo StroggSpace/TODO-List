@@ -22,6 +22,7 @@ import { useTodos } from "./store/useTodos";
 import { Settings, Task } from "./types/Objects";
 import { SettingsPage } from "./pages/settings/SettingsPage";
 import { useSettings } from "./store/useSettings";
+import { getDaystoDelete } from "./utils/getDaystoDelete";
 
 setupIonicReact();
 
@@ -29,11 +30,22 @@ export const App: React.FC = () => {
   const { darkMode } = useDarkMode();
   const [isLoading, setIsLoading] = useState(true);
   const setTodos = useTodos((state) => state.setTodos);
+  const settings = useSettings((state) => state.settings);
   const { setDefaultSettings, setSettings } = useSettings((state) => state);
 
   useEffect(() => {
     getObject("todos")
-      .then((value) => setTodos(value as Task[]))
+      .then((value) => {
+        const filteredTodos = (value as Task[]).filter((t) => {
+          if (t.deletedAt) {
+            return (
+              getDaystoDelete(new Date(t.deletedAt), settings.deleteDays) > 0
+            );
+          }
+          return true;
+        });
+        setTodos(filteredTodos);
+      })
       .catch(() => setTodos([]))
       .finally(() => {
         setIsLoading(false);
