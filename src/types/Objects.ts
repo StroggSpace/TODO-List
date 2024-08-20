@@ -15,3 +15,9 @@ export interface Task extends Note {
     completedAt: Date | null;
     deadline: boolean;
 }
+
+export interface Settings {
+    deleteDays: number;
+    hiddenCompletedTodos: boolean;
+    displayMode: "list" | "grid";
+}

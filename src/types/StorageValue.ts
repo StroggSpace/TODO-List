@@ -1,3 +1,3 @@
-import { Task, Note } from "./Objects";
+import { Task, Note, Settings } from "./Objects";
 
-export type StorageValue = Task[] | Note[] | [];
+export type StorageValue = Task[] | Note[] | [] | Settings;
