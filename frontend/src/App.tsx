@@ -23,8 +23,17 @@ import { Settings, Task } from "./types/Objects";
 import { SettingsPage } from "./pages/settings/SettingsPage";
 import { useSettings } from "./store/useSettings";
 import { getDaystoDelete } from "./utils/getDaystoDelete";
+import axios from 'axios';
 
 setupIonicReact();
+
+const apiCall = async () => {
+  await axios.get('http://localhost:8080/')
+  .then((res) => console.log(res.data))
+  .catch((err) => console.log(err));
+}
+
+apiCall();
 
 export const App: React.FC = () => {
   const { darkMode } = useDarkMode();

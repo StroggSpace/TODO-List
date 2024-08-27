@@ -21,7 +21,7 @@ interface Props {
   onToggle: () => void;
 }
 
-export const TodoItem: FC<Props> = ({ task, checked, onToggle }) => {
+export const TodoListItem: FC<Props> = ({ task, checked, onToggle }) => {
   const toggleRemoveTodo = useTodos((state) => state.toggleRemoveTodo);
   const clearTodo = useTodos((state) => state.clearTodo);
   const settings = useSettings((state) => state.settings);
@@ -37,13 +37,12 @@ export const TodoItem: FC<Props> = ({ task, checked, onToggle }) => {
         checked={checked}
         onIonChange={onToggle}
       />
-      <IonItem
-        className={`w-full ${checked ? "line-through" : ""}`}
-        routerLink={`/todo/${task.id}`}
-      >
+      <IonItem routerLink={`/todo/${task.id}`} className="w-full">
         {task.priority ? <IonIcon icon={themeIcons.alert} /> : null}
         <IonLabel>
-          <h2>{task.title}</h2>
+          <h2 className={`w-full ${checked ? "line-through" : ""}`}>
+            {task.title}
+          </h2>
           {task.deadline ? (
             <p
               className={
