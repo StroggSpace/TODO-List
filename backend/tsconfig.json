@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "esnext",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "outDir": "dist",
+      "allowJs": false,
+      "lib": ["dom", "es6"],
+      "baseUrl": "./",
+      "paths": {
+        "@/*": [
+          "./*"
+        ]
+      },
+      "typeRoots" : ["./types", "./node_modules/@types"]
+    },
+    "exclude": [
+      "node_modules",
+      "dist"
+    ]
+  }

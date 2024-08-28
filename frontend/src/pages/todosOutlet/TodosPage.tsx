@@ -66,8 +66,8 @@ export const TodosPage: React.FC = () => {
             </div>
           )}
           <CreateTodoModal />
-          <Fab id="open-modal-create" icon={themeIcons.add} />
         </IonContent>
+        <Fab id="open-modal-create" icon={themeIcons.add} />
       </IonPage>
     </>
   );

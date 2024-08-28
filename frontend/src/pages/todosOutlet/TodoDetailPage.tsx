@@ -62,8 +62,8 @@ export const TodoDetailPage = () => {
           <TodoInfo task={task} />
           <ButtonsTodoComponent task={task} />
           <EditTodo />
-          <Fab id="open-modal-edit" icon={themeIcons.reader} />
         </IonContent>
+        <Fab id="open-modal-edit" icon={themeIcons.reader} />
       </IonPage>
     </>
   );

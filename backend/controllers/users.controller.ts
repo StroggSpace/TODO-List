@@ -1,4 +1,4 @@
-const UsersService = require('../services/users.service');
+import UsersService from "../services/users.service";
 
 class UsersController {
     getUsers(req, res) {
@@ -93,4 +93,4 @@ class UsersController {
     }
 }
 
-module.exports = new UsersController();
+export default new UsersController;
