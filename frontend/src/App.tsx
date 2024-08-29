@@ -28,7 +28,7 @@ import axios from 'axios';
 setupIonicReact();
 
 const apiCall = async () => {
-  await axios.get('http://0.0.0.0:8080/users')
+  await axios.get('http://0.0.0.0:8080/')
   .then((res) => console.log(res.data))
   .catch((err) => console.log(err));
 }
