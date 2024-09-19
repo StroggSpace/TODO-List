@@ -15,6 +15,7 @@
       },
       "typeRoots" : ["./types", "./node_modules/@types"]
     },
+    "ts-node": {"require": ["tsconfig-paths/register"]},
     "exclude": [
       "node_modules",
       "dist"

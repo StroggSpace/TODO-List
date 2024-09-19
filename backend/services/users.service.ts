@@ -1,50 +1,19 @@
-const fs = require("fs");
+import User from "@/data/model/User";
+import { Error } from "mongoose";
 
 class UsersService {
-    getUsers() {
-        return new Promise((resolve, reject) => {
-            fs.readFile("./data/users.json", "utf8", (err, data) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(JSON.parse(data));
-                }
-            });
-        });
+  async getUsers() {
+    return User.find();
+  }
+
+  async createUser(user) {
+    const existingUser = await User.findOne({ email: user.email });
+    if (existingUser) {
+      throw new Error("Пользователь с таким email уже существует");
     }
-    createUser(data) {
-        return new Promise((resolve, reject) => {
-            fs.writeFile("./data/users.json", JSON.stringify(data), (err) => {
-                if (err) {
-                    return resolve(false);
-                } else {
-                    return resolve({ message: "Пользователь успешно создан" });
-                }
-            });
-        });
-    }
-    updateUser(data) {
-        return new Promise((resolve, reject) => {
-            fs.writeFile("./data/users.json", JSON.stringify(data), (err) => {
-                if (err) {
-                    return resolve(false);
-                } else {
-                    return resolve({ message: "Пользователь успешно обновлен" });
-                }
-            });
-        });
-    }
-    deleteUser(id) {
-        return new Promise((resolve, reject) => {
-            fs.writeFile("./data/users.json", JSON.stringify(id), (err) => {
-                if (err) {
-                    return resolve(false);
-                } else {
-                    return resolve({ message: "Пользователь успешно удален" });
-                }
-            });
-        });
-    }
+
+    return User.create(user);
+  }
 }
 
-export default new UsersService;
+export default new UsersService();

@@ -28,12 +28,19 @@ import axios from 'axios';
 setupIonicReact();
 
 const apiCall = async () => {
-  await axios.get('http://0.0.0.0:8080/')
+  await axios.post('http://0.0.0.0:8080/api/users' , {email: '9Oy1qU@e1xample.com', password: '12345', name: 'test'})
+  .then((res) => console.log(res.data))
+  .catch((err) => console.log(err));
+}
+
+const getUsers = async () => {
+  await axios.get('http://0.0.0.0:8080/api/users')
   .then((res) => console.log(res.data))
   .catch((err) => console.log(err));
 }
 
 apiCall();
+getUsers();
 
 export const App: React.FC = () => {
   const { darkMode } = useDarkMode();

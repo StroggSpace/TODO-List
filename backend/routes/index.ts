@@ -1,10 +1,9 @@
-import express from "express";
-import users from "./users.routes";
+import { Router } from "express";
+import usersRouter from "./users.routes";
 
+const router = Router();
 
-const router = express.Router();
-
-router.use("/users", users);
+router.use("/users", usersRouter);
 // router.use("/tasks", tasks);
 // router.use("/auth", auth);
 // router.use("/settings", settings);

@@ -7,3 +7,5 @@ const setting = new Schema({
 });
 
 const Setting = model("Setting", setting);
+
+export default Setting;
