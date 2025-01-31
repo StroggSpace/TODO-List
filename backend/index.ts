@@ -3,6 +3,9 @@ import cors from "cors";
 import routes from "./routes/index";
 import bodyParser from "body-parser";
 import db from "./data";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app: express.Application = express();
 const port: number = Number(process.env.PORT) || 8080;

@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const uri = process.env.MONGO_URI || "mongodb://127.0.0.1:27017";
+dotenv.config();
+
+const uri = process.env.MONGODB_URI
 
 mongoose.connect(`${uri}`);
 mongoose.Promise = global.Promise;
